@@ -2,4 +2,4 @@
 
 #Displays all lines that contain the word bash
 
-ps auxf | grep
+ps auxf | grep bash
