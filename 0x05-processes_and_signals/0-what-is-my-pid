@@ -1,4 +1,4 @@
-#!/bin/bash/env bash
+#!/usr/bin/env bash
 
-# Displays the PID
+#Displays the PID
 echo $$
