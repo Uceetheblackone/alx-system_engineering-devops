@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Use pgrep command to find process IDs,
+#with name containing 'bash'
+
+pgrep -l bash
