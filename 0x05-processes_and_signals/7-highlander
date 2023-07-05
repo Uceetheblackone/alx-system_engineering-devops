@@ -2,12 +2,14 @@
 
 #Displays To infinity and beyond
 
+
 #Handle SIGTERM
 
 trap "echo 'I am invincible!!!'" 15
 
 # Infinite loop
-while true; do
+while true;
+do
   echo "To infinity and beyond";
   sleep 2
 done
