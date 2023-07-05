@@ -4,8 +4,7 @@
 sockets=$(netstat -tlnp 2>/dev/null | awk '/^tcp/ {print $4, $7}')
 
 # Iterate over each socket and extract PID and program name
-while read -r socket;
-do
+while read -r socket; do
 ip=$(echo "$socket" | awk -F ':' '{print $1}')
 port=$(echo "$socket" | awk -F ':' '{print $2}')
 
