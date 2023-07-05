@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
+# kills the infinity and beyond  program using sigkill signal
 
-# Find the process ID (PID) of the 4-to_infinity_and_beyond process
+# Get the pid of the program
 pid=$(pgrep "bash ./4-to_infinity_and_beyond" -f)
 
 # Terminate the infinate process
-if [ -z "$pid" ]; then
-  echo "4-to_infinity_and_beyond process is not running."
-else
-kill "$pid"
-
-  echo "4-to_infinity_and_beyond process with PID $pid has been stopped."
+if [ -n "$id" ]
+then
+  kill -15 "$id"
 fi
