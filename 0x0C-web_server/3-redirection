@@ -1,4 +1,5 @@
- new Nginx server configured so that /redirect_me is redirecting to another page
+#!/usr/bin/env bash
+#A new Nginx server configured so that /redirect_me is redirecting to another page
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
