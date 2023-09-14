@@ -25,8 +25,8 @@ frontend http-in
 
 backend servers
         balance roundrobin
-        server 266761-web-01 100.25.165.191:80 check
-        server 266761-web-02 3.83.245.148:80 check
+        server 266761-web-01 54.236.33.100:80 check
+        server 266761-web-02 100.26.252.11:80 check
 " >> /etc/haproxy/haproxy.cfg'
 fi
 
