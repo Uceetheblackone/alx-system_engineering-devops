@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Check if the script is run with an argument
+if [ -z "$1" ]; then
+  echo "User cannot be empty or null."
+  exit 1
+fi
+sudo -u "$1" whoami
