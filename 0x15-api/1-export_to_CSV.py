@@ -1,42 +1,37 @@
 #!/usr/bin/python3
-"""
-This module returns information about his/her TODO list progress.
-"""
-import requests
-from sys import argv
-import csv
+'''
+A Python script to export data in the CSV format.
+'''
 
+import re  # Import the regular expression module
+import requests  # Import the requests module
+import sys  # Import the sys module
 
-def get_employee_info():
-    """" returns information about his/her TODO list progress. """
-
-    emp_id = int(argv[1])
-    url_1 = "https://jsonplaceholder.typicode.com/todos/"
-    url_2 = f"https://jsonplaceholder.typicode.com/users/{emp_id}"
-    todo_response = requests.get(url_1).json()
-    user_response = requests.get(url_2).json()
-
-    task_done = 0
-    total_task = 0
-    task_title = ""
-    Employee_name = user_response["name"]
-    file_name = f"{user_response['id']}.csv"
-
-    user_data = []
-    for response in todo_response:
-        if response["userId"] is emp_id:
-            data = []
-            data.append(f"'{response['userId']}'")
-            data.append(f"'{Employee_name}'")
-            data.append(f"'{response['completed']}'")
-            data.append(f"'{response['title']}'")
-            user_data.append(data)
-
-    with open(file_name, 'w', newline='') as file:
-        writer = csv.writer(file)
-        for row in user_data:
-            writer.writerow(row)
-
+# The API's URL
+API_URL = 'https://jsonplaceholder.typicode.com'
 
 if __name__ == '__main__':
-    get_employee_info()
+    # Check if command line arguments were provided
+    if len(sys.argv) > 1:
+        # Check if the argument is a valid user ID
+        if re.fullmatch(r'\d+', sys.argv[1]):
+            # Get the user's information from the API
+            id = int(sys.argv[1])
+            user_res = requests.get('{}/users/{}'.format(API_URL, id)).json()
+            todos_res = requests.get('{}/todos'.format(API_URL)).json()
+            user_name = user_res.get('username')
+
+            # Filter todos for the given user
+            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
+
+            # Write the data to a CSV file
+            with open('{}.csv'.format(id), 'w') as file:
+                for todo in todos:
+                    file.write(
+                        '"{}","{}","{}","{}"\n'.format(
+                            id,
+                            user_name,
+                            todo.get('completed'),
+                            todo.get('title')
+                        )
+                    )
